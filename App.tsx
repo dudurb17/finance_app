@@ -10,7 +10,7 @@ function App() {
   return (
     <SafeAreaProvider>
        <Container >
-        <Title>Hello World</Title>
+        <Title color="white">Hello World</Title>
        </Container>
     </SafeAreaProvider>
   );
@@ -23,10 +23,10 @@ align-items: center;
 background-color: #000;
 `;
 
-const Title = styled.Text`
+const Title = styled.Text<{ color: string }>`
 font-size: 20px;
 font-weight: bold;
-color: #fff;
+color: ${({ color }) => color};
 `;
 
 export default App;
