@@ -1,9 +1,10 @@
-import { View, Text } from 'react-native'
+import Container from '@/components/Container';
+import { View, Text } from 'react-native';
 
 export default function SignUp() {
   return (
-    <View>
+    <Container backgroundColor="#f0f4ff" edges={['bottom']}>
       <Text>Register</Text>
-    </View>
-  )
+    </Container>
+  );
 }
