@@ -13,7 +13,18 @@ export default function PublicRoutes() {
         component={SignIn}
         options={{ headerShown: false }}
       />
-      <PublicStack.Screen name="SignUp" component={SignUp} />
+      <PublicStack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: '#87CEEB',
+          },
+          headerTintColor: '#fff',
+          headerTitle: 'Voltar',
+        }}
+      />
     </PublicStack.Navigator>
   );
 }

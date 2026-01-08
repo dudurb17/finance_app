@@ -1,10 +1,40 @@
 import Container from '@/components/Container';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
+import {
+  AreaInput,
+  Input,
+  SignUpContent,
+  SubmitButton,
+  SubmitText,
+} from './styles';
 
 export default function SignUp() {
   return (
-    <Container backgroundColor="#f0f4ff" removedPaddingTop={true}>
-      <Text>Register</Text>
+    <Container removedPaddingTop={true}>
+      <SignUpContent>
+        <AreaInput>
+          <Input placeholder="Nome" placeholderTextColor="#CCCCCC" />
+        </AreaInput>
+
+        <AreaInput>
+          <Input placeholder="Seu email" placeholderTextColor="#CCCCCC" />
+        </AreaInput>
+
+        <AreaInput>
+          <Input placeholder="Sua senha" placeholderTextColor="#CCCCCC" />
+        </AreaInput>
+
+        <AreaInput>
+          <Input
+            placeholder="Confirme sua senha"
+            placeholderTextColor="#CCCCCC"
+          />
+        </AreaInput>
+
+        <SubmitButton>
+          <SubmitText>Cadastrar</SubmitText>
+        </SubmitButton>
+      </SignUpContent>
     </Container>
   );
 }
