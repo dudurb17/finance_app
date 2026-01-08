@@ -1,7 +1,10 @@
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, View } from 'react-native';
 import React from 'react';
 import { ContainerStyled } from './styles';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 
 interface ContainerProps {
   children: React.ReactNode;
@@ -14,16 +17,19 @@ export default function Container({
   backgroundColor,
   edges = ['top', 'bottom'],
 }: ContainerProps) {
+  const inset = useSafeAreaInsets();
   return (
     <ContainerStyled backgroundColor={backgroundColor}>
-      <SafeAreaView style={{ flex: 1 }} edges={edges}>
+      <View
+        style={{ flex: 1, paddingTop: inset.top, paddingBottom: inset.bottom }}
+      >
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
           style={{ flex: 1 }}
         >
           {children}
         </KeyboardAvoidingView>
-      </SafeAreaView>
+      </View>
     </ContainerStyled>
   );
 }

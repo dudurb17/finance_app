@@ -2,24 +2,26 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Routes from './src/routes';
 import { StatusBar } from 'react-native';
 import styled from 'styled-components/native';
-import { useStatusBarColorStyle } from '@/store/theme/store';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { BottomSheetProvider } from '@/components/BottomSheetProvider';
 
 function App() {
-  const statusBarColorStyle = useStatusBarColorStyle();
-
   return (
-    <SafeAreaProvider>
-      <Container statusBarColorStyle={statusBarColorStyle}>
-        <StatusBar barStyle="dark-content" />
-        <Routes />
-      </Container>
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <BottomSheetProvider>
+          <Container>
+            <StatusBar barStyle="dark-content" />
+            <Routes />
+          </Container>
+        </BottomSheetProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
 
-const Container = styled.View<{ statusBarColorStyle: string }>`
+const Container = styled.View`
   flex: 1;
-  background-color: ${({ statusBarColorStyle }) => statusBarColorStyle};
 `;
 
 const SafeArea = styled(SafeAreaView)`
