@@ -4,8 +4,8 @@ import BottomSheet, {
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useAnimatedStyle } from 'react-native-reanimated';
 import { useMemo } from 'react';
+import { Keyboard } from 'react-native';
 
 interface BottomSheetContextType {
   open: (content: ReactNode, snapPoints?: string[]) => void;
@@ -52,7 +52,9 @@ export function BottomSheetProvider({ children }: BottomSheetProviderProps) {
   );
 
   const open = (newContent: ReactNode, customSnapPoints?: string[]) => {
+    Keyboard.dismiss();
     setContent(newContent);
+
     setSnapPoints(customSnapPoints || defaultSnapPoints);
     bottomSheetRef.current?.expand();
   };

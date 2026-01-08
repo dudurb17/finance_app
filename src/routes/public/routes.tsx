@@ -1,8 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUp from '@/pages/SignUp';
 import SignIn from '@/pages/SignIn';
+import { PublicRoutesParams } from './types';
 
-const PublicStack = createNativeStackNavigator();
+const PublicStack = createNativeStackNavigator<PublicRoutesParams>();
 
 export default function PublicRoutes() {
   return (
