@@ -12,16 +12,18 @@ import {
 } from './styles';
 import { Text } from 'react-native';
 
-import { useBottomSheet } from '@/components/BottomSheetProvider';
+import { useBottomSheet } from '@/contexts/bottomSheet';
 import {
   PublicRoutesNavigationProp,
   PublicRoutesParams,
 } from '@/routes/public/types';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '@/contexts/auth';
 
 export default function SignIn() {
   const { open } = useBottomSheet();
   const navigation = useNavigation<PublicRoutesNavigationProp>();
+  const { user } = useAuth();
 
   const handleOpenBottomSheet = () => {
     open(<Text>Fazendo Login...</Text>, ['25%', '50%']);
@@ -41,7 +43,7 @@ export default function SignIn() {
           activeOpacity={0.8}
           onPress={() => handleOpenBottomSheet()}
         >
-          <SubmitText>Acessar</SubmitText>
+          <SubmitText></SubmitText>
         </SubmitButton>
 
         <Link>
