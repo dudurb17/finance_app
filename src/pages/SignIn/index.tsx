@@ -20,11 +20,12 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '@/contexts/auth';
 
+import { API_URL } from '@env';
 export default function SignIn() {
   const { open } = useBottomSheet();
   const navigation = useNavigation<PublicRoutesNavigationProp>();
   const { user } = useAuth();
-
+  console.log('API_URL', API_URL);
   const handleOpenBottomSheet = () => {
     open(<Text>Fazendo Login...</Text>, ['25%', '50%']);
   };
