@@ -1,12 +1,7 @@
 import Container from '@/components/Container';
-import { Text } from 'react-native';
-import {
-  AreaInput,
-  Input,
-  SignUpContent,
-  SubmitButton,
-  SubmitText,
-} from './styles';
+import Input from '@/components/Input';
+import Button from '@/components/Button';
+import { SignUpContent } from './styles';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/auth';
 import { useNavigation } from '@react-navigation/native';
@@ -15,6 +10,7 @@ import { PublicRoutesNavigationProp } from '@/routes/public/types';
 export default function SignUp() {
   const { signUp } = useAuth();
   const navigation = useNavigation<PublicRoutesNavigationProp>();
+  const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState({
     name: '',
     email: '',
@@ -22,43 +18,38 @@ export default function SignUp() {
   });
 
   async function handleSignUp() {
+    if (user.name === '' || user.email === '' || user.password === '') return;
+    setIsLoading(true);
     await signUp(user);
     navigation.goBack();
+    setIsLoading(false);
   }
 
   return (
     <Container removedPaddingTop={true}>
       <SignUpContent>
-        <AreaInput>
-          <Input
-            value={user?.name}
-            onChangeText={text => setUser({ ...user, name: text })}
-            placeholder="Nome"
-            placeholderTextColor="#CCCCCC"
-          />
-        </AreaInput>
+        <Input
+          value={user?.name}
+          onChangeText={text => setUser({ ...user, name: text })}
+          placeholder="Nome"
+        />
 
-        <AreaInput>
-          <Input
-            value={user?.email}
-            onChangeText={text => setUser({ ...user, email: text })}
-            placeholder="Seu email"
-            placeholderTextColor="#CCCCCC"
-          />
-        </AreaInput>
+        <Input
+          value={user?.email}
+          onChangeText={text => setUser({ ...user, email: text })}
+          placeholder="Seu email"
+        />
 
-        <AreaInput>
-          <Input
-            value={user?.password}
-            onChangeText={text => setUser({ ...user, password: text })}
-            placeholder="Sua senha"
-            placeholderTextColor="#CCCCCC"
-          />
-        </AreaInput>
+        <Input
+          value={user?.password}
+          onChangeText={text => setUser({ ...user, password: text })}
+          placeholder="Sua senha"
+          isPassword
+        />
 
-        <SubmitButton onPress={handleSignUp}>
-          <SubmitText>Cadastrar</SubmitText>
-        </SubmitButton>
+        <Button onPress={handleSignUp} isLoading={isLoading}>
+          Cadastrar
+        </Button>
       </SignUpContent>
     </Container>
   );

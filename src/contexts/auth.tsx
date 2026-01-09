@@ -9,16 +9,13 @@ export const AuthContext = createContext<{
   setUser: (user: User) => void;
   signUp: (user: User) => Promise<void>;
 }>({
-  user: { name: '', email: '' },
+  user: null,
   setUser: () => {},
   signUp: () => Promise.resolve(),
 });
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User>({
-    name: 'Eduardo',
-    email: 'eduardo@gmail.com',
-  });
+  const [user, setUser] = useState<User>(null);
 
   async function signUp(user: User) {
     try {
