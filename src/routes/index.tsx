@@ -1,15 +1,16 @@
 import React from 'react';
 
 import PublicRoutes from './public/routes';
-import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import PrivateRoutes from './private/routes';
+import { useAuth } from '@/contexts/auth';
 
 export default function Routes() {
-  const isAuthenticated = false;
+  const { signed } = useAuth();
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <View /> : <PublicRoutes />}
+      {signed ? <PrivateRoutes /> : <PublicRoutes />}
     </NavigationContainer>
   );
 }

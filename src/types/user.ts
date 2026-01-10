@@ -1,5 +1,9 @@
 export type User = null | {
-  name: string;
+  id?: string;
+  name?: string;
   email: string;
   password?: string;
+  token?: string;
 };
+
+export type UserData = NonNullable<User>;

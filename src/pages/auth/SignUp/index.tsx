@@ -6,12 +6,13 @@ import { useState } from 'react';
 import { useAuth } from '@/contexts/auth';
 import { useNavigation } from '@react-navigation/native';
 import { PublicRoutesNavigationProp } from '@/routes/public/types';
+import { UserData } from '@/types/user';
 
 export default function SignUp() {
   const { signUp } = useAuth();
   const navigation = useNavigation<PublicRoutesNavigationProp>();
   const [isLoading, setIsLoading] = useState(false);
-  const [user, setUser] = useState({
+  const [user, setUser] = useState<UserData>({
     name: '',
     email: '',
     password: '',

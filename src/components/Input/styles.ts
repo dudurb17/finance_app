@@ -19,7 +19,7 @@ export const PasswordButton = styled.TouchableOpacity`
 `;
 
 export const InputContainer = styled.TouchableOpacity`
-  background-color: '#fff';
+  background-color: #fff;
   flex: 1;
   border-radius: 8px;
   flex-direction: row;

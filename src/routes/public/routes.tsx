@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SignUp from '@/pages/SignUp';
-import SignIn from '@/pages/SignIn';
+import SignUp from '@/pages/auth/SignUp';
+import SignIn from '@/pages/auth/SignIn';
 import { PublicRoutesParams } from './types';
 
 const PublicStack = createNativeStackNavigator<PublicRoutesParams>();

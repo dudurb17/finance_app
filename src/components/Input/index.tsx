@@ -30,6 +30,7 @@ export default function Input({
           placeholder={placeholder}
           placeholderTextColor={placeholderTextColor}
           secureTextEntry={isPassword && !isPasswordVisible}
+          autoCapitalize="none"
           {...rest}
         />
         {isPassword && (
