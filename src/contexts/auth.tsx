@@ -1,23 +1,57 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { User, UserData } from '@/types/user';
 import api from '@/services/api';
 
+import Keychain, { UserCredentials } from 'react-native-keychain';
 export const AuthContext = createContext<{
   signed: boolean;
   user: User;
   setUser: (user: User) => void;
   signUp: (user: User) => Promise<void>;
   signIn: (user: UserData) => Promise<void>;
+  isStarting: boolean;
 }>({
   signed: false,
   user: null,
   setUser: () => {},
   signUp: () => Promise.resolve(),
   signIn: () => Promise.resolve(),
+  isStarting: true,
 });
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User>(null);
+  const [isStarting, setIsStarting] = useState(true);
+
+  useEffect(() => {
+    async function getToken() {
+      try {
+        const credentials = await Keychain.getGenericPassword();
+        const { password } = credentials as UserCredentials;
+        if (password) {
+          const response = await api.get('/me', {
+            headers: {
+              Authorization: `Bearer ${password}`,
+            },
+          });
+          if (response?.status === 200) {
+            setUser({
+              id: response?.data?.id,
+              email: response?.data?.email,
+              name: response?.data?.name,
+            });
+            api.defaults.headers['Authorization'] = `Bearer ${password}`;
+          }
+        }
+      } catch (error) {
+        console.error('error', error);
+      } finally {
+        setIsStarting(false);
+      }
+    }
+
+    getToken();
+  }, []);
 
   async function signUp(user: User) {
     try {
@@ -32,6 +66,8 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const response = await api.post('/login', user);
       if (response?.status === 200) {
+        await Keychain.setGenericPassword('token', response?.data?.token);
+
         api.defaults.headers['Authorization'] =
           `Bearer ${response?.data?.token}`;
         setUser({
@@ -49,7 +85,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, setUser, signUp, signIn }}
+      value={{ signed: !!user, user, setUser, signUp, signIn, isStarting }}
     >
       {children}
     </AuthContext.Provider>
