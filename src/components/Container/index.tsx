@@ -15,6 +15,7 @@ export default function Container({
   removedPaddingTop = false,
 }: ContainerProps) {
   const inset = useSafeAreaInsets();
+
   return (
     <ContainerView
       removedPaddingTop={removedPaddingTop}

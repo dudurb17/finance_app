@@ -10,6 +10,7 @@ export const AuthContext = createContext<{
   signUp: (user: User) => Promise<void>;
   signIn: (user: UserData) => Promise<void>;
   isStarting: boolean;
+  signOut: () => Promise<void>;
 }>({
   signed: false,
   user: null,
@@ -17,6 +18,7 @@ export const AuthContext = createContext<{
   signUp: () => Promise.resolve(),
   signIn: () => Promise.resolve(),
   isStarting: true,
+  signOut: () => Promise.resolve(),
 });
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
@@ -53,6 +55,12 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
     getToken();
   }, []);
 
+  async function signOut() {
+    await Keychain.resetGenericPassword();
+    api.defaults.headers['Authorization'] = '';
+    setUser(null);
+  }
+
   async function signUp(user: User) {
     try {
       const response = await api.post('/users', user);
@@ -85,7 +93,15 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ signed: !!user, user, setUser, signUp, signIn, isStarting }}
+      value={{
+        signed: !!user,
+        user,
+        setUser,
+        signUp,
+        signIn,
+        isStarting,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>
