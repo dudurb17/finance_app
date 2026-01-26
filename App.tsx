@@ -1,3 +1,4 @@
+import './global.css';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Routes from './src/routes';
 import { StatusBar } from 'react-native';

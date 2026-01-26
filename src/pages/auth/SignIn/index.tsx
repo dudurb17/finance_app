@@ -41,10 +41,9 @@ export default function SignIn() {
           placeholder="Password"
           isPassword
         />
-        <Button onPress={handleSignIn} isLoading={isLoading}>
+        <Button type="primary" onPress={handleSignIn} isLoading={isLoading}>
           Entrar
         </Button>
-
         <Link>
           <LinkText onPress={() => navigation.navigate('SignUp')}>
             Criar conta

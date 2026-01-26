@@ -1,23 +1,28 @@
 import React from 'react';
-import { ActivityIndicator, TouchableOpacityProps } from 'react-native';
-import { ButtonStyled, ButtonText } from './styles';
-interface ButtonProps extends TouchableOpacityProps {
+import { ActivityIndicator, Pressable, PressableProps } from 'react-native';
+import { Text } from 'react-native-gesture-handler';
+import { button, text } from './styles';
+interface ButtonProps extends PressableProps {
   children: React.ReactNode;
   isLoading?: boolean;
+  type?: 'primary' | 'secondary' | 'danger';
+  size?: 'sm' | 'md' | 'lg';
 }
+
 
 export default function Button({
   children,
-  activeOpacity = 0.8,
+  type,
+  size,
   isLoading = false,
   ...rest
 }: ButtonProps) {
   return (
-    <ButtonStyled activeOpacity={activeOpacity} {...rest}>
-      <ButtonText>
+    <Pressable className={button({ type, size })} {...rest}>
+      <Text className={text({ size })}>
         {isLoading && <ActivityIndicator size="small" color="#fff" />}
         {!isLoading && children}
-      </ButtonText>
-    </ButtonStyled>
+      </Text>
+    </Pressable>
   );
 }

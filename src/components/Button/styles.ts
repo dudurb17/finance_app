@@ -1,16 +1,42 @@
-import styled from 'styled-components/native';
+import { tv } from 'tailwind-variants';
 
-export const ButtonStyled = styled.TouchableOpacity`
-  width: 100%;
-  height: 45px;
-  background-color: #3b3bdf;
-  border-radius: 8px;
-  margin-top: 20px;
-  justify-content: center;
-  align-items: center;
-`;
+export const button = tv({
+  base: 'font-semibold rounded-lg px-4 py-2 w-full items-center justify-center',
+  variants: {
+    type: {
+      primary: 'bg-blue-800',
+      secondary: 'bg-gray-500',
+      danger: 'bg-red-500',
+    },
+    size: {
+      sm: 'text-sm',
+      md: 'text-base',
+      lg: 'text-lg',
+    },
+  },
+  compoundVariants: [
+    {
+      type: 'primary',
+      size: 'lg',
+      class: 'bg-blue-600',
+    },
+  ],
+  defaultVariants: {
+    type: 'primary',
+    size: 'md',
+  },
+});
 
-export const ButtonText = styled.Text`
-  font-size: 20px;
-  color: #fff;
-`;
+export const text = tv({
+  base: 'text-white',
+  variants: {
+    size: {
+      sm: 'text-sm',
+      md: 'text-base',
+      lg: 'text-lg',
+    },
+  },
+  defaultVariants: {
+    size: 'md',
+  },
+});
