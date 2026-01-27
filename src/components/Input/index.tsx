@@ -1,15 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { TextInput, TextInputProps, TouchableOpacity } from 'react-native';
-import {
-  AreaInput,
-  InputContainer,
-  InputStyled,
-  PasswordButton,
-} from './styles';
+import { TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
 import { FontAwesome } from '@react-native-vector-icons/fontawesome';
-interface InputProps extends TextInputProps {
+import { HexColor } from '@/types/color';
+
+interface InputProps extends Omit<TextInputProps, 'placeholderTextColor'> {
   placeholder?: string;
-  placeholderTextColor?: string;
+  placeholderTextColor?: HexColor;
   isPassword?: boolean;
 }
 
@@ -22,11 +18,14 @@ export default function Input({
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const inputRef = useRef<TextInput>(null);
   return (
-    <AreaInput>
-      <InputContainer onPress={() => inputRef.current?.focus()}>
-        <InputStyled
-          // @ts-ignore
+    <View className="flex-row mb-5">
+      <TouchableOpacity 
+        className="bg-white flex-1 rounded-lg flex-row"
+        onPress={() => inputRef.current?.focus()}
+      >
+        <TextInput
           ref={inputRef}
+          className="p-2.5 flex-1 rounded-lg text-gray-900"
           placeholder={placeholder}
           placeholderTextColor={placeholderTextColor}
           secureTextEntry={isPassword && !isPasswordVisible}
@@ -34,7 +33,8 @@ export default function Input({
           {...rest}
         />
         {isPassword && (
-          <PasswordButton
+          <TouchableOpacity
+            className="items-center justify-center px-2.5"
             onPress={() => setIsPasswordVisible(!isPasswordVisible)}
           >
             {isPasswordVisible ? (
@@ -42,9 +42,9 @@ export default function Input({
             ) : (
               <FontAwesome name="eye-slash" size={24} color="black" />
             )}
-          </PasswordButton>
+          </TouchableOpacity>
         )}
-      </InputContainer>
-    </AreaInput>
+      </TouchableOpacity>
+    </View>
   );
 }

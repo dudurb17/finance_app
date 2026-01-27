@@ -1,12 +1,12 @@
 import Container from '@/components/Container';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
-import { SignUpContent } from './styles';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/auth';
 import { useNavigation } from '@react-navigation/native';
 import { PublicRoutesNavigationProp } from '@/routes/public/types';
 import { UserData } from '@/types/user';
+import { Text, View } from 'react-native';
 
 export default function SignUp() {
   const { signUp } = useAuth();
@@ -28,7 +28,7 @@ export default function SignUp() {
 
   return (
     <Container removedPaddingTop={true}>
-      <SignUpContent>
+      <View className="flex-1 justify-center items-center">
         <Input
           value={user?.name}
           onChangeText={text => setUser({ ...user, name: text })}
@@ -47,11 +47,10 @@ export default function SignUp() {
           placeholder="Sua senha"
           isPassword
         />
-
         <Button onPress={handleSignUp} isLoading={isLoading}>
           Cadastrar
         </Button>
-      </SignUpContent>
+      </View>
     </Container>
   );
 }

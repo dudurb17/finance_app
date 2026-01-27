@@ -5,7 +5,7 @@ import { button, text } from './styles';
 interface ButtonProps extends PressableProps {
   children: React.ReactNode;
   isLoading?: boolean;
-  type?: 'primary' | 'secondary' | 'danger';
+  type?: 'primary' | 'secondary' | 'danger' | 'outline';
   size?: 'sm' | 'md' | 'lg';
 }
 

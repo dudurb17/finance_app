@@ -1,16 +1,22 @@
 import './global.css';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaListener, SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Routes from './src/routes';
 import { StatusBar } from 'react-native';
 import styled from 'styled-components/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetProvider } from '@/contexts/bottomSheet';
 import AuthProvider from '@/contexts/auth';
+import { Uniwind } from 'uniwind';
 
 function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
+        <SafeAreaListener
+          onChange={({ insets }) => {
+            Uniwind.updateInsets(insets);
+          }}
+        >
         <BottomSheetProvider>
           <AuthProvider>
             <Container>
@@ -19,6 +25,7 @@ function App() {
             </Container>
           </AuthProvider>
         </BottomSheetProvider>
+        </SafeAreaListener>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

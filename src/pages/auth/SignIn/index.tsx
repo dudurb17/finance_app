@@ -1,10 +1,8 @@
 import Container from '@/components/Container';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
-import { Logo, SignInContent, Link, LinkText } from './styles';
-import { Text } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
-import { useBottomSheet } from '@/contexts/bottomSheet';
 import { PublicRoutesNavigationProp } from '@/routes/public/types';
 import { useNavigation } from '@react-navigation/native';
 import { UserData } from '@/types/user';
@@ -28,8 +26,8 @@ export default function SignIn() {
 
   return (
     <Container backgroundColor="#f0f4ff">
-      <SignInContent>
-        <Logo source={require('@/assets/images/Logo.png')} />
+      <View className="flex-1 justify-center items-center">
+        <Image className="mb-5" source={require('@/assets/images/Logo.png')} />
         <Input
           value={user?.email}
           onChangeText={text => setUser({ ...user, email: text })}
@@ -44,12 +42,12 @@ export default function SignIn() {
         <Button type="primary" onPress={handleSignIn} isLoading={isLoading}>
           Entrar
         </Button>
-        <Link>
-          <LinkText onPress={() => navigation.navigate('SignUp')}>
+        <TouchableOpacity className="mt-3">
+          <Text className="text-17px text-gray-800 font-semibold" onPress={() => navigation.navigate('SignUp')}>
             Criar conta
-          </LinkText>
-        </Link>
-      </SignInContent>
+          </Text>
+        </TouchableOpacity>
+      </View>
     </Container>
   );
 }

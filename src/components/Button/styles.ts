@@ -7,6 +7,7 @@ export const button = tv({
       primary: 'bg-blue-800',
       secondary: 'bg-gray-500',
       danger: 'bg-red-500',
+      outline: 'bg-transparent',
     },
     size: {
       sm: 'text-sm',
