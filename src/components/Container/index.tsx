@@ -6,16 +6,18 @@ interface ContainerProps {
   children: React.ReactNode;
   backgroundColor?: string;
   paddingTop?: boolean;
+  removedPaddingX?: boolean;
 }
 
 export default function Container({
   children,
   backgroundColor = 'bg-gray-100',
   paddingTop = false,
+  removedPaddingX = false,
 }: ContainerProps) {
   return (
     <View
-     className={cn('flex-1', backgroundColor, 'px-4', 'pb-safe', { 'pt-safe': paddingTop })}
+     className={cn('flex-1', backgroundColor, {'px-4': !removedPaddingX}, 'pb-safe', { 'pt-safe': paddingTop })}
     >
        <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
