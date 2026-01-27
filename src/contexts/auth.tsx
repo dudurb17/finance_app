@@ -3,6 +3,7 @@ import { User, UserData } from '@/types/user';
 import api from '@/services/api';
 
 import Keychain, { UserCredentials } from 'react-native-keychain';
+import { API_URL } from '@env';
 export const AuthContext = createContext<{
   signed: boolean;
   user: User;
@@ -64,6 +65,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
   async function signUp(user: User) {
     try {
       const response = await api.post('/users', user);
+      console.log('response', response);
       console.log('response', response);
     } catch (error) {
       console.error('error', error);

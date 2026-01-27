@@ -17,14 +17,15 @@ function App() {
             Uniwind.updateInsets(insets);
           }}
         >
-        <BottomSheetProvider>
+          {/* // desabilitatando o bottom sheet provider por conta de bloquear clique na tela em alguns celulares*/}
+          {/* <BottomSheetProvider> */}
           <AuthProvider>
             <Container>
               <StatusBar barStyle="dark-content" />
               <Routes />
             </Container>
           </AuthProvider>
-        </BottomSheetProvider>
+        {/* </BottomSheetProvider> */}
         </SafeAreaListener>
       </SafeAreaProvider>
     </GestureHandlerRootView>

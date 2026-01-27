@@ -9,7 +9,7 @@ export default function PrivateRoutes() {
     shadowColor: 'transparent',
     borderBottomWidth: 0,
     shadowOpacity: 0,
-    backgroundColor: '#f0f4ff',
+    backgroundColor: '#f3f4f6',
   };
   const headerStyle = {
     headerStyle: defaultHeaderStyle,

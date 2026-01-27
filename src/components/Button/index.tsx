@@ -1,7 +1,6 @@
 import React from 'react';
-import { ActivityIndicator, Pressable, PressableProps } from 'react-native';
-import { Text } from 'react-native-gesture-handler';
-import { button, text } from './styles';
+import { ActivityIndicator, Pressable, PressableProps, Text } from 'react-native';
+import { button } from './styles';
 interface ButtonProps extends PressableProps {
   children: React.ReactNode;
   isLoading?: boolean;
@@ -19,7 +18,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <Pressable className={button({ type, size })} {...rest}>
-      <Text className={text({ size })}>
+      <Text className="text-white">
         {isLoading && <ActivityIndicator size="small" color="#fff" />}
         {!isLoading && children}
       </Text>
