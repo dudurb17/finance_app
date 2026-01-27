@@ -27,7 +27,7 @@ export default function SignUp() {
   }
 
   return (
-    <Container removedPaddingTop={true}>
+    <Container>
       <View className="flex-1 justify-center items-center">
         <Input
           value={user?.name}

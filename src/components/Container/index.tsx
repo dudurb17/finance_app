@@ -1,21 +1,21 @@
 import { KeyboardAvoidingView, Platform, View } from 'react-native';
 import React from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { cn } from 'tailwind-variants';
 
 interface ContainerProps {
   children: React.ReactNode;
   backgroundColor?: string;
-  removedPaddingTop?: boolean;
+  paddingTop?: boolean;
 }
 
 export default function Container({
   children,
   backgroundColor = 'bg-gray-100',
-  removedPaddingTop,
+  paddingTop = false,
 }: ContainerProps) {
   return (
     <View
-      className={`flex-1 ${backgroundColor} px-4 pb-safe ${removedPaddingTop ? '' : 'pt-safe'}`}
+     className={cn('flex-1', backgroundColor, 'px-4', 'pb-safe', { 'pt-safe': paddingTop })}
     >
        <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
