@@ -4,7 +4,6 @@ import PublicRoutes from './public/routes';
 import { NavigationContainer } from '@react-navigation/native';
 import PrivateRoutes from './private/routes';
 import { useAuth } from '@/contexts/auth';
-import { ActivityIndicator, Text, View } from 'react-native';
 import Splash from '@/pages/Splash';
 
 export default function Routes() {

@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { PrivateRoutesParams } from './types';
 import Home from '@/pages/Home';
+import NewRegistration from '@/pages/NewRegistration';
 
 const Drawer = createDrawerNavigator<PrivateRoutesParams>();
 
@@ -21,6 +22,7 @@ export default function PrivateRoutes() {
   return (
     <Drawer.Navigator screenOptions={headerStyle}>
       <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="NewRegistration" component={NewRegistration} />
     </Drawer.Navigator>
   );
 }
