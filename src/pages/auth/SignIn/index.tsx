@@ -43,7 +43,10 @@ export default function SignIn() {
           Entrar
         </Button>
         <TouchableOpacity className="mt-3">
-          <Text className="text-17px text-gray-800 font-semibold" onPress={() => navigation.navigate('SignUp')}>
+          <Text
+            className="text-17px text-gray-800 font-semibold"
+            onPress={() => navigation.navigate('SignUp')}
+          >
             Criar conta
           </Text>
         </TouchableOpacity>

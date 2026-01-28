@@ -18,6 +18,9 @@ export default function PrivateRoutes() {
     drawerActiveTintColor: '#FFF',
     drawerInactiveBackgroundColor: '#F0F4FF',
     drawerInactiveTintColor: '#333',
+    drawerItemStyle: {
+      marginVertical: 5,
+    },
   };
   return (
     <Drawer.Navigator screenOptions={headerStyle}>

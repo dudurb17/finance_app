@@ -1,5 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { TextInput, TextInputProps, TouchableOpacity, View } from 'react-native';
+import {
+  TextInput,
+  TextInputProps,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { FontAwesome } from '@react-native-vector-icons/fontawesome';
 import { HexColor } from '@/types/color';
 
@@ -19,7 +24,7 @@ export default function Input({
   const inputRef = useRef<TextInput>(null);
   return (
     <View className="flex-row mb-5">
-      <TouchableOpacity 
+      <TouchableOpacity
         className="bg-white flex-1 rounded-lg flex-row"
         onPress={() => inputRef.current?.focus()}
       >

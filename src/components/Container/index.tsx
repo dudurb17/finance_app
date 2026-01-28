@@ -17,14 +17,20 @@ export default function Container({
 }: ContainerProps) {
   return (
     <View
-     className={cn('flex-1', backgroundColor, {'px-4': !removedPaddingX}, 'pb-safe', { 'pt-safe': paddingTop })}
+      className={cn(
+        'flex-1',
+        backgroundColor,
+        { 'px-4': !removedPaddingX },
+        'pb-safe',
+        { 'pt-safe': paddingTop },
+      )}
     >
-       <KeyboardAvoidingView
+      <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={{ flex: 1 }}
         enabled
       >
-      {children}
+        {children}
       </KeyboardAvoidingView>
     </View>
   );

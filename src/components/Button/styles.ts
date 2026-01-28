@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants';
 
 export const button = tv({
-  base: 'font-semibold rounded-lg px-4 py-2 w-full items-center justify-center',
+  base: 'font-semibold rounded-lg px-4 py-2 w-full items-center justify-center mt-5',
   variants: {
     type: {
       primary: 'bg-blue-800',
@@ -27,4 +27,3 @@ export const button = tv({
     size: 'md',
   },
 });
-

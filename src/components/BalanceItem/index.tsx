@@ -1,5 +1,5 @@
-import { Text, View } from 'react-native'
-import React, { useMemo } from 'react'
+import { Text, View } from 'react-native';
+import React, { useMemo } from 'react';
 import { Balance } from '@/types/balance';
 
 interface BalanceItemProps {
@@ -27,9 +27,13 @@ export default function BalanceItem({ balance }: BalanceItemProps) {
     }
   }, [balance.tag]);
   return (
-    <View className={`${labelName.color} p-4 rounded-lg w-60 items-start justify-center`}>
+    <View
+      className={`${labelName.color} p-4 rounded-lg w-60 items-start justify-center`}
+    >
       <Text className="text-white  font-bold">{labelName?.label}</Text>
-      <Text className="text-white text-xl font-semibold ">R$ {balance?.saldo?.toFixed(2).replace('.', ',')}</Text>
+      <Text className="text-white text-xl font-semibold ">
+        R$ {balance?.saldo?.toFixed(2).replace('.', ',')}
+      </Text>
     </View>
   );
 }
