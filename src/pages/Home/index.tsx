@@ -1,19 +1,19 @@
 import { FlatList, Text, View } from 'react-native';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Container from '@/components/Container';
-import { useAuth } from '@/contexts/auth';
-import Button from '@/components/Button';
 import api from '@/services/api';
 import { format } from 'date-fns';
 import { Balance } from '@/types/balance';
 import BalanceItem from '@/components/BalanceItem';
 import { useFocusEffect } from '@react-navigation/native';
+import FontAwesome from '@react-native-vector-icons/fontawesome';
+import { Movements } from '@/types/movements';
+import MovementItem from '@/components/MovementItem';
 
 export default function Home() {
-  const { signOut } = useAuth();
   const [listBalences, setListBalences] = useState<Balance[]>([]);
   const [dateMovements, setDateMovements] = useState(new Date());
-
+  const [movements, setMovements] = useState<Movements[]>([]);
   useFocusEffect(
     useCallback(() => {
       let isActive = true;
@@ -21,12 +21,14 @@ export default function Home() {
       async function getListBalences() {
         try {
           let date = format(dateMovements, 'dd-MM-yyyy');
+
+          const receives = await api.get('/receives', { params: { date } });
+          console.log('receives', receives?.data);
           const response = await api.get('/balance', { params: { date } });
           if (isActive) {
-            console.log('response', response?.data);
+            setMovements(receives?.data);
             setListBalences(response?.data);
           }
-          console.log('response', response?.data);
         } catch (error) {
           console.error('error', error);
         }
@@ -41,9 +43,8 @@ export default function Home() {
   );
 
   return (
-    <Container>
-      <Text>Home</Text>
-      <View className="h-35">
+    <Container removedPaddingX>
+      <View className="h-35 px-4">
         <FlatList
           data={listBalences}
           horizontal
@@ -53,7 +54,22 @@ export default function Home() {
           renderItem={({ item }) => <BalanceItem balance={item} />}
         />
       </View>
-      <Button onPress={() => signOut()}>Sair</Button>
+      <View className=" bg-white/80 flex-1 rounded-t-2xl mt-5">
+        <View className="px-4">
+          <View className="flex-row gap-3 items-center mt-3">
+            <FontAwesome name="calendar" size={24} color="black" />
+            <Text className="text-lg font-bold">Últimas movimentações</Text>
+          </View>
+          <FlatList
+            data={movements}
+            contentContainerStyle={{ gap: 10 }}
+            className="mt-3 mb-10"
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(___, index) => index.toString()}
+            renderItem={({ item }) => <MovementItem movement={item} />}
+          />
+        </View>
+      </View>
     </Container>
   );
 }
