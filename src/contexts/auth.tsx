@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { User, UserData } from '@/types/user';
 import api from '@/services/api';
-
+import { widgetBridge } from '@/services/widgetBridge';
 import Keychain, { UserCredentials } from 'react-native-keychain';
 import { API_URL } from '@env';
 export const AuthContext = createContext<{
@@ -44,6 +44,7 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
               name: response?.data?.name,
             });
             api.defaults.headers['Authorization'] = `Bearer ${password}`;
+            widgetBridge.setCredentials(API_URL, password).catch(() => {});
           }
         }
       } catch (error) {
@@ -86,6 +87,9 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
           token: response?.data?.token,
           name: response?.data?.name,
         });
+        widgetBridge
+          .setCredentials(API_URL, response?.data?.token)
+          .catch(() => {});
       }
     } catch (error) {
       console.error('error', error);

@@ -9,6 +9,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import FontAwesome from '@react-native-vector-icons/fontawesome';
 import { Movements } from '@/types/movements';
 import MovementItem from '@/components/MovementItem';
+import { widgetBridge } from '@/services/widgetBridge';
 
 export default function Home() {
   const [listBalences, setListBalences] = useState<Balance[]>([]);
@@ -28,6 +29,12 @@ export default function Home() {
           if (isActive) {
             setMovements(receives?.data);
             setListBalences(response?.data);
+            const saldoItem = response?.data?.find(
+              (b: Balance) => b.tag === 'saldo',
+            );
+            if (saldoItem != null) {
+              widgetBridge.setBalance(saldoItem.saldo).catch(() => {});
+            }
           }
         } catch (error) {
           console.error('error', error);
