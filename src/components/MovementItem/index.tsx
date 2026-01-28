@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, Pressable, Alert } from 'react-native';
 import React from 'react';
 import { Movements } from '@/types/movements';
 import FontAwesome from '@react-native-vector-icons/fontawesome';
@@ -6,11 +6,20 @@ import { cn } from 'tailwind-variants';
 
 interface MovementItemProps {
   movement: Movements;
+  onDelete: (id: string) => void;
 }
 
-export default function MovementItem({ movement }: MovementItemProps) {
+export default function MovementItem({
+  movement,
+  onDelete,
+}: MovementItemProps) {
   return (
-    <View className="bg-gray-200 rounded-lg p-2 justify-center">
+    <Pressable
+      onLongPress={() => {
+        onDelete(movement.id);
+      }}
+      className="bg-gray-200 rounded-lg p-2 justify-center"
+    >
       <View
         className={cn(
           'flex-row items-center justify-center w-25 gap-2 rounded-lg h-8',
@@ -29,6 +38,6 @@ export default function MovementItem({ movement }: MovementItemProps) {
       <Text className="text-xl font-bold">
         R$ {movement?.value?.toFixed(2).replace('.', ',')}
       </Text>
-    </View>
+    </Pressable>
   );
 }

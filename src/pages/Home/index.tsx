@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from 'react-native';
+import { Alert, FlatList, Text, View } from 'react-native';
 import React, { useCallback, useState } from 'react';
 import Container from '@/components/Container';
 import api from '@/services/api';
@@ -46,8 +46,38 @@ export default function Home() {
       return () => {
         isActive = false;
       };
-    }, []),
+    }, [dateMovements]),
   );
+
+  const askDeleteMovement = async (id: string) => {
+    Alert.alert(
+      'Deletar movimentação',
+      'Tem certeza que deseja deletar esta movimentação?',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Deletar',
+          onPress: () => {
+            deleteMovement(id);
+          },
+        },
+      ],
+    );
+  };
+
+  const deleteMovement = async (id: string) => {
+    try {
+      const response = await api.delete(`/receives/delete`, {
+        params: { item_id: id },
+      });
+      setDateMovements(new Date());
+    } catch (error) {
+      console.error('error', error);
+    }
+  };
 
   return (
     <Container removedPaddingX>
@@ -73,7 +103,9 @@ export default function Home() {
             className="mt-3 mb-10"
             showsVerticalScrollIndicator={false}
             keyExtractor={(___, index) => index.toString()}
-            renderItem={({ item }) => <MovementItem movement={item} />}
+            renderItem={({ item }) => (
+              <MovementItem movement={item} onDelete={askDeleteMovement} />
+            )}
           />
         </View>
       </View>
