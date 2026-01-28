@@ -70,7 +70,7 @@ export default function Home() {
 
   const deleteMovement = async (id: string) => {
     try {
-      const response = await api.delete(`/receives/delete`, {
+      await api.delete(`/receives/delete`, {
         params: { item_id: id },
       });
       setDateMovements(new Date());
