@@ -3,6 +3,7 @@ import { PrivateRoutesParams } from './types';
 import Home from '@/pages/Home';
 import NewRegistration from '@/pages/NewRegistration';
 import Profile from '@/pages/Profile';
+import CustomDrawer from '@/components/CustomDrawer';
 
 const Drawer = createDrawerNavigator<PrivateRoutesParams>();
 
@@ -24,7 +25,7 @@ export default function PrivateRoutes() {
     },
   };
   return (
-    <Drawer.Navigator screenOptions={headerStyle}>
+    <Drawer.Navigator screenOptions={headerStyle} drawerContent={CustomDrawer}>
       <Drawer.Screen name="Home" component={Home} />
       <Drawer.Screen name="NewRegistration" component={NewRegistration} />
       <Drawer.Screen name="Profile" component={Profile} />
