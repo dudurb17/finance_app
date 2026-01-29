@@ -58,7 +58,7 @@ export default function NewRegistration() {
   };
 
   return (
-    <Container>
+    <Container titleHeader="Novo registro">
       <Input
         placeholder="Descrição"
         value={description}

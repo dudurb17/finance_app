@@ -7,24 +7,12 @@ const PublicStack = createNativeStackNavigator<PublicRoutesParams>();
 
 export default function PublicRoutes() {
   return (
-    <PublicStack.Navigator initialRouteName="SignIn">
-      <PublicStack.Screen
-        name="SignIn"
-        component={SignIn}
-        options={{ headerShown: false }}
-      />
-      <PublicStack.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{
-          headerShown: true,
-          headerStyle: {
-            backgroundColor: '#87CEEB',
-          },
-          headerTintColor: '#fff',
-          headerTitle: 'Voltar',
-        }}
-      />
+    <PublicStack.Navigator
+      initialRouteName="SignIn"
+      screenOptions={{ headerShown: false }}
+    >
+      <PublicStack.Screen name="SignIn" component={SignIn} />
+      <PublicStack.Screen name="SignUp" component={SignUp} />
     </PublicStack.Navigator>
   );
 }

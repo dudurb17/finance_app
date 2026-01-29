@@ -11,7 +11,7 @@ export default function Profile() {
   const { user, signOut } = useAuth();
   const navigation = useNavigation<PrivateRoutesNavigationProp>();
   return (
-    <Container>
+    <Container titleHeader="Perfil">
       <View className="flex-1 pt-8">
         <View className="bg-white rounded-2xl shadow-sm p-6 items-center mb-6">
           <View className="w-20 h-20 rounded-full bg-blue-100 items-center justify-center mb-4">

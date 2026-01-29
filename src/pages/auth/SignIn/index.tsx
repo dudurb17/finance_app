@@ -25,7 +25,7 @@ export default function SignIn() {
   }
 
   return (
-    <Container paddingTop backgroundColor="#f0f4ff">
+    <Container backgroundColor="#f0f4ff" showHeader={false}>
       <View className="flex-1 justify-center items-center">
         <Image className="mb-5" source={require('@/assets/images/Logo.png')} />
         <Input

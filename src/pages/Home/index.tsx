@@ -1,4 +1,11 @@
-import { Alert, FlatList, Text, View } from 'react-native';
+import {
+  Alert,
+  FlatList,
+  Modal,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, { useCallback, useState } from 'react';
 import Container from '@/components/Container';
 import api from '@/services/api';
@@ -10,11 +17,13 @@ import FontAwesome from '@react-native-vector-icons/fontawesome';
 import { Movements } from '@/types/movements';
 import MovementItem from '@/components/MovementItem';
 import { widgetBridge } from '@/services/widgetBridge';
+import CalendarModal from '@/components/CalendarModal';
 
 export default function Home() {
   const [listBalences, setListBalences] = useState<Balance[]>([]);
   const [dateMovements, setDateMovements] = useState(new Date());
   const [movements, setMovements] = useState<Movements[]>([]);
+  const [showModal, setShowModal] = useState(false);
   useFocusEffect(
     useCallback(() => {
       let isActive = true;
@@ -80,7 +89,13 @@ export default function Home() {
   };
 
   return (
-    <Container removedPaddingX>
+    <Container
+      removedPaddingX
+      titleHeader="Home"
+      showModal={showModal}
+      onCloseModal={() => setShowModal(false)}
+      childrenModal={<CalendarModal onClose={() => setShowModal(false)} />}
+    >
       <View className="h-35 px-4">
         <FlatList
           data={listBalences}
@@ -93,10 +108,13 @@ export default function Home() {
       </View>
       <View className=" bg-white/80 flex-1 rounded-t-2xl mt-5">
         <View className="px-4">
-          <View className="flex-row gap-3 items-center mt-3">
+          <TouchableOpacity
+            className="flex-row gap-3 items-center mt-3"
+            onPress={() => setShowModal(true)}
+          >
             <FontAwesome name="calendar" size={24} color="black" />
             <Text className="text-lg font-bold">Últimas movimentações</Text>
-          </View>
+          </TouchableOpacity>
           <FlatList
             data={movements}
             contentContainerStyle={{ gap: 10 }}
@@ -109,6 +127,14 @@ export default function Home() {
           />
         </View>
       </View>
+      <Modal
+        visible={showModal}
+        animationType="fade"
+        transparent={true}
+        onRequestClose={() => setShowModal(false)}
+      >
+        <CalendarModal onClose={() => setShowModal(false)} />
+      </Modal>
     </Container>
   );
 }

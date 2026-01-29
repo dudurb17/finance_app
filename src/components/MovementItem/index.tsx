@@ -16,7 +16,7 @@ export default function MovementItem({
   return (
     <Pressable
       onLongPress={() => {
-        onDelete(movement.id);
+        onDelete(movement?.id);
       }}
       className="bg-gray-200 rounded-lg p-2 justify-center"
     >

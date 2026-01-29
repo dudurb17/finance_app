@@ -8,14 +8,8 @@ import CustomDrawer from '@/components/CustomDrawer';
 const Drawer = createDrawerNavigator<PrivateRoutesParams>();
 
 export default function PrivateRoutes() {
-  const defaultHeaderStyle = {
-    shadowColor: 'transparent',
-    borderBottomWidth: 0,
-    shadowOpacity: 0,
-    backgroundColor: '#f3f4f6',
-  };
   const headerStyle = {
-    headerStyle: defaultHeaderStyle,
+    headerShown: false,
     drawerActiveBackgroundColor: '#3b3bdf',
     drawerActiveTintColor: '#FFF',
     drawerInactiveBackgroundColor: '#F0F4FF',
