@@ -9,7 +9,7 @@ import {
 import React, { useCallback, useState } from 'react';
 import Container from '@/components/Container';
 import api from '@/services/api';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import { Balance } from '@/types/balance';
 import BalanceItem from '@/components/BalanceItem';
 import { useFocusEffect } from '@react-navigation/native';
@@ -88,13 +88,23 @@ export default function Home() {
     }
   };
 
+  const filterDate = (dateString: string) => {
+    setShowModal(false);
+    setDateMovements(parse(dateString, 'yyyy-MM-dd', new Date()));
+  };
+
   return (
     <Container
       removedPaddingX
       titleHeader="Home"
       showModal={showModal}
       onCloseModal={() => setShowModal(false)}
-      childrenModal={<CalendarModal onClose={() => setShowModal(false)} />}
+      childrenModal={
+        <CalendarModal
+          onClose={() => setShowModal(false)}
+          handleFilterDate={filterDate}
+        />
+      }
     >
       <View className="h-35 px-4">
         <FlatList
@@ -127,14 +137,6 @@ export default function Home() {
           />
         </View>
       </View>
-      <Modal
-        visible={showModal}
-        animationType="fade"
-        transparent={true}
-        onRequestClose={() => setShowModal(false)}
-      >
-        <CalendarModal onClose={() => setShowModal(false)} />
-      </Modal>
     </Container>
   );
 }
