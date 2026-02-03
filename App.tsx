@@ -2,13 +2,10 @@ import './src/global.css';
 import {
   SafeAreaListener,
   SafeAreaProvider,
-  SafeAreaView,
 } from 'react-native-safe-area-context';
 import Routes from './src/routes';
-import { StatusBar } from 'react-native';
-import styled from 'styled-components/native';
+import { StatusBar, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { BottomSheetProvider } from '@/contexts/bottomSheet';
 import AuthProvider from '@/contexts/auth';
 import { Uniwind } from 'uniwind';
 
@@ -22,19 +19,15 @@ function App() {
           }}
         >
           <AuthProvider>
-            <Container>
+            <View className="flex-1">
               <StatusBar barStyle="dark-content" />
               <Routes />
-            </Container>
+            </View>
           </AuthProvider>
         </SafeAreaListener>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }
-
-const Container = styled.View`
-  flex: 1;
-`;
 
 export default App;
